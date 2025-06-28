@@ -12,15 +12,20 @@ def main():
     x = constants.SCREEN_WIDTH / 2
     y = constants.SCREEN_HEIGHT / 2
     player = Player(x, y)
+
+    updatables = [player]
+    drawables = [player]
     while True:
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 return
         
-        player.update(dt)
+        for obj in updatables:
+            obj.update(dt)
         
         screen.fill((0, 0, 0))
-        player.draw(screen)
+        for obj in drawables:
+            obj.draw(screen)
         pygame.display.flip()
 
         dt = clock.tick(60) / 1000
